@@ -60,7 +60,6 @@ export default class State {
   }
 
   get selectedSamples() {
-      console.log(dm);
     return dm.data.data.filter(sample => every(dm.data.parameters, (key, ix) => {
       if (dm.possibleValues[ix].length == 1) { return true; }
       if (this.modes[key] == 'aggregate') { return true }
@@ -109,9 +108,10 @@ export default class State {
 
   get filteredAccuracy() {
     const data = this.selectedSamplesWHeatmap;
+    const ix = dm.data.parameters.indexOf('is_correct');
     let counter = 0;
     for (const d of data) {
-      if (d[d.length - 1]) {
+      if (d[ix]) {
         counter++;
       }
     }
