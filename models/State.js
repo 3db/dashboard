@@ -1,6 +1,6 @@
 import { range, every, uniq, xor, min, max} from 'lodash';
 import { observable, action, makeObservable, computed } from 'mobx';
-
+import { nn } from '../utils/utils'
 import dm from '../models/DataManager';
 
 export default class State {
