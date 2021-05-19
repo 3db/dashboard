@@ -36,9 +36,10 @@ export default class State {
 
   get heatMapData() {
     const ixes = this.heatMapAxesIx;
-    const values = this.selectedSamples
+    const values = this.selectedSamples;
+    const paramNames = dm.data.parameters;
 
-    return values.map(x => [x[ixes[0]], x[ixes[1]], x[x.length - 1]]);
+    return values.map(x => [x[ixes[0]], x[ixes[1]], x[paramNames.indexOf("is_correct")]]);
   }
 
   resetState() {
