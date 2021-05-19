@@ -179,6 +179,7 @@ const HeatMap = observer(({ currentState }) => {
     <div style={{ width:'100%', height:'100%',  backgroundColor: 'white',
                   padding: '15px 15px 20px 30px'
     }}>
+      <p>Click any cell to see the corresponding images</p>
       <table style={{ width: '100%', height: '100%', borderSpacing: '3px', borderCollapse: 'separate',
         textAlign: 'center', color: 'white', fontWeight:'bold'
       }}>
@@ -199,9 +200,12 @@ const HeatMap = observer(({ currentState }) => {
                     style={{backgroundColor: colors[Math.round(accuracy * (colors.length - 1))]}}
                     key={`col${x}`}
                     width={`${100/x_bins.length}%`}
-                    onMouseLeave={action(() => currentState.selectedHeatMapCell = null)}
-                    onMouseEnter={action(() => {
-                      currentState.selectedHeatMapCell = [x, y]
+                    onMouseUp={action(() => {
+                        if(currentState.selectedHeatMapCell == null) {
+                            currentState.selectedHeatMapCell = [x, y];
+                        } else {
+                            currentState.selectedHeatMapCell = null;
+                        }
                     })}
                   >
                     {Math.round(accuracy * 100)}%
@@ -213,13 +217,13 @@ const HeatMap = observer(({ currentState }) => {
         ))}
       </table>
       <div style={{ position: 'absolute', bottom: 0, width:'100%', textAlign:'center', height: '20px'}}>
-        {heatMapAxes[0]}
+        {heatMapAxes[0].replace('render_args.', '')}
       </div>
       <div style={{ position: 'absolute', top: 0, height:'100%', textAlign:'center', width: '20px', }}>
         <div style={{ position: 'absolute', bottom: '50%', transform: 'rotate(-90deg) translateY(-125px)',
           transformOrigin: '50% 0', width:'200px'
         }}>
-        {heatMapAxes[1]}
+        {heatMapAxes[1].replace('render_args.', '')}
         </div>
       </div>
     </div>
