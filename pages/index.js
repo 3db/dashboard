@@ -60,7 +60,7 @@ export default observer(() => {
 
   console.log(currentServer);
   if(currentServer != '') {
-    dm.fetchUrl('http://' + currentServer);
+    dm.fetchUrl('http://' + currentServer + '/log.json');
   }
 
   const loading = !dm.loaded && currentServer != '' && !dm.failed;
