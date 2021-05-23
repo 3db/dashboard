@@ -19,3 +19,7 @@ a {
     min-height: 100%;
     display: flex;
 }
+
+.ant-tooltip {
+    pointer-events: none;
+}

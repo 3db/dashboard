@@ -230,17 +230,17 @@ const HeatMap = observer(({ currentState }) => {
   </>
 })
 
-const CorrectBar = observer(({ currentState }) => {
-  return (
-    <div style={{ backgroundColor: 'white', padding: '15px 15px 15px 15px' }}>
-      <Progress
-        strokeWidth={20}
-        percent={(currentState.filteredAccuracy * 100).toPrecision(2)}
-        status="active"
-      />
-    </div>
-  );
-});
+// const CorrectBar = observer(({ currentState }) => {
+//   return (
+    // <div style={{ backgroundColor: 'white', padding: '15px 15px 15px 15px' }}>
+    //   <Progress
+        // strokeWidth={20}
+        // percent={(currentState.filteredAccuracy * 100).toPrecision(2)}
+        // status="active"
+    //   />
+    // </div>
+//   );
+// });
 
 const Main = () => {
   const [ currentState, setCurrentState ] = useState(null);
@@ -260,7 +260,7 @@ const Main = () => {
         <HeatMap currentState={currentState} />
       </div>
     </div>
-    <CorrectBar currentState={currentState} />
+    {/* <CorrectBar currentState={currentState} /> */}
     <RenderImages currentState={currentState} />
 
   </>

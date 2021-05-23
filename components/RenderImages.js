@@ -47,7 +47,7 @@ const RenderImages = observer(({ currentState }) => {
         var texts = [];
         
         if(data["output_type"] == "bboxes") {
-            const bboxes = data["outputs"];
+            const bboxes = data["boxes"];
             for(let bbox of bboxes) {
                 if(bbox[0] < 0) { break; }
                 const rand = Math.random().toString().substr(2, 8);
@@ -62,12 +62,12 @@ const RenderImages = observer(({ currentState }) => {
                                 fontSize="8"
                                 style={{stroke: 'white', strokeWidth: '0.6em'}}
                                 transform="translate(0 10)"
-                                key={rand + "_text"}>{COCOClasses[bbox[5]]}</text>);
+                                key={rand + "_text"}>{dm.data.class_map[bbox[5]]}</text>);
                 texts.push(<text x={(bbox[0] * 100) + "%"}
                                 y={(bbox[1] * 100) + "%"}
                                 fontSize="8"
                                 transform="translate(0 10)"
-                                key={rand + "_textbg"}>{COCOClasses[bbox[5]]}</text>);
+                                key={rand + "_textbg"}>{dm.data.class_map[bbox[5]]}</text>);
             }
         }
         else if (data["output_type"] == "classes") {
