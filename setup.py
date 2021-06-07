@@ -39,7 +39,7 @@ class BuildDashboardCommand(distutils.cmd.Command):
 
 
 setup(name='threedboard',
-      version='0.0.4',
+      version='0.0.5',
       description='Web Interface to visualize the results of 3DB experiments',
       url='https://github.com/3db/dashboard',
       author='3DB authors',
