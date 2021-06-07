@@ -39,7 +39,7 @@ class BuildDashboardCommand(distutils.cmd.Command):
 
 
 setup(name='threedboard',
-      version='0.0.5',
+      version='0.0.6',
       description='Web Interface to visualize the results of 3DB experiments',
       url='https://github.com/3db/dashboard',
       author='3DB authors',
@@ -48,7 +48,6 @@ setup(name='threedboard',
       author_email='leclerc@mit.edu',
       license='MIT',
       install_requires=[
-        'webbrowser',
         'flask',
         'flask_cors',
         'numpy',
