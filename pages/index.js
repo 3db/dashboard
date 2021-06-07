@@ -54,9 +54,15 @@ export default observer(() => {
   const router = useRouter()
   const [currentServer, setServer ] = useState('');
 
-  if (currentServer === '' && typeof(router.query.url) !== 'undefined') {
-    setServer(router.query.url);
-  }
+  useEffect(() => {
+    if (currentServer === '') {
+      if(typeof(router.query.url) !== 'undefined') {
+        setServer(router.query.url);
+      } else {
+        setServer(`${window.location.hostname}:${window.location.port}`);
+      }
+    }
+  });
 
   console.log(currentServer);
   if(currentServer != '') {
