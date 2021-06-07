@@ -1,17 +1,18 @@
 # dashboard
 Dashboard to explore 3DB experiments
 
+## Install
+
+`pip install threedboard`
+
 ## Run the dasboard
 
-### Github hosted
+`python -m threedboard EXPERIMENT_FOLDER`
 
-- Launch `python -m threedb.dashboard`
-- browse: https://3db.github.io/dashboard/  and enter the url of the server started by the command above.
+## Build from source
 
+When cloning the repo directory the source code for the website has to be built. You will require `node` and `npm` and then run:
 
-### Locally hosted
+`python setup.py build_dashboard`
 
-- Launch `python -m threedb.dashboard`
-- Clone this repo
-- `npm install`
-- `npm run dev`
+**Note:** This is not necessary if you install via `pip` it ships with everything built for you out of the box. No external dependencies required to run the dashboard.
