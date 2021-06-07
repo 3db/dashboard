@@ -38,7 +38,7 @@ class BuildDashboardCommand(distutils.cmd.Command):
 
 
 setup(name='',
-      version='0.0.6',
+      version='0.0.1',
       description='Web Interface to visualize the results of 3DB experiments',
       url='https://github.com/3db/dashboard',
       author='3DB authors',
