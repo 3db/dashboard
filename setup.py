@@ -35,10 +35,11 @@ class BuildDashboardCommand(distutils.cmd.Command):
         'Running command: %s' % str(command),
         level=distutils.log.INFO)
     r = subprocess.check_output(command)
+    print(r)
 
 
 setup(name='threedboard',
-      version='0.0.3',
+      version='0.0.4',
       description='Web Interface to visualize the results of 3DB experiments',
       url='https://github.com/3db/dashboard',
       author='3DB authors',
