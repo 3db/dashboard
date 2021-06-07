@@ -56,8 +56,10 @@ export default observer(() => {
 
   useEffect(() => {
     if (currentServer === '') {
-      if(typeof(router.query.url) !== 'undefined') {
-        setServer(router.query.url);
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      if(urlParams.has('url')) {
+        setServer(urlParams.get('url'));
       } else {
         setServer(`${window.location.hostname}:${window.location.port}`);
       }

@@ -19,10 +19,11 @@ const ModeSelector = observer(({ record, currentState }) => {
   const isControl = typeof(record.children) != 'undefined';
 
   if (isControl) {
-    const childrenModes = record.children.map(({ key }) => currentState.modes[key]);
-    if ((new Set(childrenModes)).size == 1) {
-      current_mode = childrenModes[0];
-    }
+    // const childrenModes = record.children.map(({ key }) => currentState.modes[key]);
+    // if ((new Set(childrenModes)).size == 1) {
+    //   current_mode = childrenModes[0];
+    // }
+    return null;
   }
 
   const allowHeatmap = (!isControl && Object.values(currentState.modes).filter(x=> x === 'heatmap').length < 2) || current_mode === 'heatmap'
@@ -153,8 +154,8 @@ const HeatMap = observer(({ currentState }) => {
 
   if (heatMapAxes.length != 2) {
     return <Result
-        status="error"
-        title="Error"
+        status="info"
+        title="Info"
         subTitle="You need to have exactly two parameters in heatmap mode to enable this display"
     />
   }
@@ -180,13 +181,21 @@ const HeatMap = observer(({ currentState }) => {
                   padding: '15px 15px 20px 30px'
     }}>
       <p>Click any cell to see the corresponding images</p>
-      <table style={{ width: '100%', height: '100%', borderSpacing: '3px', borderCollapse: 'separate',
+      <table style={{ width: '100%', height: 'calc(100% - 50px)', borderSpacing: '0px', borderCollapse: 'separate',
         textAlign: 'center', color: 'white', fontWeight:'bold'
       }}>
         {y_bins.map((y_value, y) => (
           <tr key={`row${y}`}>
             {x_bins.map((x_value, x) => {
               const accuracy = correctCounts[x][y] / binCounts[x][y];
+              let currentlySelected = false;
+              if (currentState.selectedHeatMapCell !== null) {
+                console.log('ok');
+                const [cx, cy] = currentState.selectedHeatMapCell;
+                if (cx === x && cy === y) {
+                  currentlySelected = true;
+                }
+              }
               return <>
                 <Tooltip
                   arrowPointAtCenter
@@ -197,14 +206,16 @@ const HeatMap = observer(({ currentState }) => {
 
                       </>}>
                   <td
-                    style={{backgroundColor: colors[Math.round(accuracy * (colors.length - 1))]}}
+                  style={{backgroundColor: colors[Math.round(accuracy * (colors.length - 1))],
+                    cursor:'pointer',
+                  border: `3px solid ${currentlySelected ? 'black' : 'white'}`}}
                     key={`col${x}`}
                     width={`${100/x_bins.length}%`}
-                    onMouseUp={action(() => {
-                        if(currentState.selectedHeatMapCell == null) {
-                            currentState.selectedHeatMapCell = [x, y];
-                        } else {
+                    onClick={action(() => {
+                        if(currentlySelected) {
                             currentState.selectedHeatMapCell = null;
+                        } else {
+                            currentState.selectedHeatMapCell = [x, y];
                         }
                     })}
                   >
@@ -216,7 +227,7 @@ const HeatMap = observer(({ currentState }) => {
           </tr>
         ))}
       </table>
-      <div style={{ position: 'absolute', bottom: 0, width:'100%', textAlign:'center', height: '20px'}}>
+      <div style={{ position: 'absolute', bottom: '15px', width:'100%', textAlign:'center', height: '20px'}}>
         {heatMapAxes[0].replace('render_args.', '')}
       </div>
       <div style={{ position: 'absolute', top: 0, height:'100%', textAlign:'center', width: '20px', }}>
@@ -251,7 +262,7 @@ const Main = () => {
     currentState.update();
   }
   return <>
-    <div style={{ position: 'relative', backgroundColor: 'white' }}>
+    <div style={{ position: 'relative', backgroundColor: 'white', minHeight:'250px' }}>
       <div style={{ width: '50%', display: 'inline-block', padding: '20px'}}>
         <RenderControls currentState={currentState} />
       </div>
