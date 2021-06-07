@@ -105,3 +105,5 @@ dist
 
 __pycache__
 threedboard/dashboard_html/
+build
+threedboard.egg-info
