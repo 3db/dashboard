@@ -21,8 +21,6 @@ import threedboard
 THREEDB_FOLDER = path.abspath(path.dirname(threedboard.__file__))
 DASHBOARD_UI = path.join(THREEDB_FOLDER, 'dashboard_html')
 
-print("DASHBOARD_UI", DASHBOARD_UI)
-
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='3DB dashboard API')

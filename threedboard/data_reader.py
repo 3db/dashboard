@@ -11,7 +11,6 @@ from os import path
 import numpy as np
 from tqdm import tqdm
 
-
 class DataReader:
     """
     Class that reads a log folder and packs the data in order to be sent to
@@ -75,7 +74,7 @@ class DataReader:
             full_data = handle.readlines()
             handle.seek(0, 2)
             self.last_size = handle.tell()
-            n_samples = len(full_data) - self.next_ix - 1
+            n_samples = len(full_data) - self.next_ix
             for i in tqdm(range(n_samples)):
                 json_data = full_data[self.next_ix + i]
                 data = json.loads(json_data)
